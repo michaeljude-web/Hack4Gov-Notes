@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .result {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 150px;
+            font-family: 'Courier New', monospace;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+
+        .error {
+            color: #e74c3c;
+            padding: 15px;
+            background: #fee;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success {
+            color: #27ae60;
+            padding: 10px;
+            background: #efe;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Base64 Tool</h1>
+        <p class="subtitle">Encode at Decode ng Base64 strings</p>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('decode')">Decode</button>
+            <button class="tab" onclick="switchTab('encode')">Encode</button>
+        </div>
+
+        <div class="input-group">
+            <label id="inputLabel">I-paste ang Base64 string:</label>
+            <textarea id="input" placeholder="cGljb0NURntjMDBrMWVfbTBuc3Rlcl9sMHZlc19jMDBraWVzXzc4QjRDMzkwfQ=="></textarea>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="processInput()">
+                <span id="btnText">🔓 Decode</span>
+            </button>
+            <button class="btn-secondary" onclick="clearAll()">🗑️ Clear</button>
+        </div>
+
+        <div class="input-group">
+            <label>Result:</label>
+            <div class="result" id="result">
+                <button class="copy-btn" onclick="copyResult()" id="copyBtn" style="display:none;">📋 Copy</button>
+                <span id="resultText" style="color: #999;">Walang result pa...</span>
+            </div>
+        </div>
+
+        <div class="error" id="error"></div>
+        <div class="success" id="success"></div>
+    </div>
+
+    <script>
+        let currentMode = 'decode';
+
+        function switchTab(mode) {
+            currentMode = mode;
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const inputLabel = document.getElementById('inputLabel');
+            const btnText = document.getElementById('btnText');
+
+            if (mode === 'decode') {
+                inputLabel.textContent = 'I-paste ang Base64 string:';
+                btnText.textContent = '🔓 Decode';
+            } else {
+                inputLabel.textContent = 'I-type ang text na gusto mo i-encode:';
+                btnText.textContent = '🔒 Encode';
+            }
+
+            clearAll();
+        }
+
+        function processInput() {
+            const input = document.getElementById('input').value.trim();
+            const resultText = document.getElementById('resultText');
+            const copyBtn = document.getElementById('copyBtn');
+            const errorDiv = document.getElementById('error');
+            
+            errorDiv.style.display = 'none';
+
+            if (!input) {
+                showError('Please enter some text!');
+                return;
+            }
+
+            try {
+                let result;
+                if (currentMode === 'decode') {
+                    result = atob(input);
+                } else {
+                    result = btoa(input);
+                }
+                
+                resultText.textContent = result;
+                resultText.style.color = '#333';
+                copyBtn.style.display = 'block';
+            } catch (e) {
+                showError('Invalid input! ' + (currentMode === 'decode' ? 'Hindi valid na Base64 string.' : 'Hindi ma-encode ang text.'));
+                resultText.textContent = 'Walang result pa...';
+                resultText.style.color = '#999';
+                copyBtn.style.display = 'none';
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('resultText').textContent = 'Walang result pa...';
+            document.getElementById('resultText').style.color = '#999';
+            document.getElementById('copyBtn').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+        }
+
+        function copyResult() {
+            const resultText = document.getElementById('resultText').textContent;
+            navigator.clipboard.writeText(resultText).then(() => {
+                showSuccess('Nakopy na sa clipboard! ✓');
+            });
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        // Allow Enter key to process
+        document.getElementById('input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                processInput();
+            }
+        });
+    </script>
+</body>
+</html>
