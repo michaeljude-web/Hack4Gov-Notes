@@ -1,49 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CYLAB Vigenère Decryptor</title>
-  <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#94a3b8;--accent:#7c3aed;--glass:rgba(255,255,255,0.03)}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
-    body{background:linear-gradient(180deg,#071025,#07162a);color:#e6eef6;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{width:800px;max-width:100%;background:var(--card);border-radius:12px;padding:20px;box-shadow:0 8px 30px rgba(2,6,23,0.6);backdrop-filter:blur(6px)}
-    h1{margin:0 0 6px;font-size:20px}
-    p.lead{margin:0 0 14px;color:var(--muted);font-size:13px}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input[type=text], textarea{width:100%;border:1px solid rgba(255,255,255,0.06);background:var(--glass);padding:10px;border-radius:8px;color:inherit;font-size:14px}
-    textarea{min-height:140px;resize:vertical}
-    .controls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-    button{background:linear-gradient(180deg,var(--accent),#5b21b6);border:0;padding:10px 12px;border-radius:8px;color:white;cursor:pointer;font-weight:600}
-    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
-    .small{padding:7px 10px;font-size:13px}
-    .note{font-size:12px;color:var(--muted);margin-top:10px}
-    .output{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);min-height:64px}
-    .footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--muted);font-size:13px}
-    @media (max-width:720px){.row{flex-direction:column}}
-  </style>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-  <main class="card">
-    <h1>CYLAB — Vigenère Decryptor</h1>
-    <p class="lead">Decrypt text encrypted with a Vigenère cipher using the key "CYLAB". Non-letters are preserved and case is kept.</p>
+<body class="bg-dark">
+  <div class="container min-vh-100 d-flex align-items-center justify-content-center py-4">
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-lg">
+        <div class="card-body p-4">
+          <h1 class="h4 card-title mb-2">CYLAB — Vigenère Decryptor</h1>
+          <p class="card-text text-muted mb-4">Decrypt text encrypted with a Vigenère cipher using the key "CYLAB". Non-letters are preserved and case is kept.</p>
 
-    <label for="input">Ciphertext</label>
-    <textarea id="input" placeholder="Ilagay dito ang ciphertext..."></textarea>
+          <div class="mb-3">
+            <label for="input" class="form-label">Ciphertext</label>
+            <textarea id="input" class="form-control" rows="6" placeholder="Ilagay dito ang ciphertext..."></textarea>
+          </div>
 
-    <div class="controls">
-      <button id="run">Decrypt</button>
-      <button id="clear" class="ghost small">Clear</button>
-      <button id="copy" class="ghost small">Copy</button>
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <button id="run" class="btn btn-primary">Decrypt</button>
+            <button id="clear" class="btn btn-outline-secondary btn-sm">Clear</button>
+            <button id="copy" class="btn btn-outline-secondary btn-sm">Copy</button>
+          </div>
+
+          <div class="mb-3">
+            <label for="output" class="form-label">Decrypted Output</label>
+            <div id="output" class="form-control" contenteditable="true" spellcheck="false" style="min-height: 100px;"></div>
+          </div>
+
+          <p class="text-muted small mb-0">Uses fixed key: CYLAB</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <label for="output">Decrypted Output</label>
-    <div id="output" class="output" contenteditable="true" spellcheck="false"></div>
-
-    <p class="note">Uses fixed key: CYLAB</p>
-  </main>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   <script>
     function isAlpha(ch){return /[A-Za-z]/.test(ch)}
     function mod(n,m){return ((n % m) + m) % m}
