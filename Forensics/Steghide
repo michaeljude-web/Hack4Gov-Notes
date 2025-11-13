@@ -1,0 +1,18 @@
+┌──(kali㉿kali)-[~]
+└─$ cd Downloads
+                                                                                                                     
+┌──(kali㉿kali)-[~/Downloads]
+└─$ ls
+ hash.txt   img.jpg   lab.jpeg   lab.txt   logs.txt  'New Empty File'  'New Empty File (copy 1)'
+                                                                                                                                                                                                                                                                                    
+┌──(kali㉿kali)-[~/Downloads]
+└─$ steghide --extract -sf img.jpg
+Enter passphrase: 
+wrote extracted data to "flag.txt".
+                                                                                                                                                                  
+┌──(kali㉿kali)-[~/Downloads]
+└─$ cat flag.txt                        
+picoCTF{h1dd3n_1n_1m4g3_1c55ccd0}
+                                                                                                                                                                  
+
+
