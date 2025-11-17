@@ -1,0 +1,32 @@
+
+---
+
+# ✅ **STEP 1 — Install Ruby**
+
+```bash
+sudo apt install ruby-full
+```
+
+---
+
+# ✅ **STEP 2 — Install dependencies**
+
+```bash
+sudo apt install libpng-dev zlib1g-dev
+```
+
+---
+
+# ✅ **STEP 3 — Install zsteg via gem**
+
+```bash
+sudo gem install zsteg
+```
+
+Kapag successful, test mo:
+
+```bash
+zsteg -h
+```
+
+
