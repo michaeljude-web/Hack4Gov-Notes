@@ -1,0 +1,60 @@
+JPEG / JPG
+Start (SOI): FF D8 FF
+End (EOI): FF D9
+
+PNG
+Header: 89 50 4E 47 0D 0A 1A 0A
+
+GIF
+GIF87a: 47 49 46 38 37 61
+GIF89a: 47 49 46 38 39 61
+
+BMP
+Header: 42 4D
+
+WEBP
+Header: 52 49 46 46
+
+TIFF
+Little-endian: 49 49 2A 00
+Big-endian: 4D 4D 00 2A
+
+ICO (Windows Icon)
+Header: 00 00 01 00
+
+CUR (Windows Cursor)
+Header: 00 00 02 00
+
+PSD (Photoshop Document)
+Header: 38 42 50 53
+
+RAW (Camera RAW, e.g., Canon CR2)
+Header: 49 49 2A 00 10 00 00 00
+
+EXR (OpenEXR)
+Header: 76 2F 31 01
+
+HEIC / HEIF
+Header: 00 00 00 ?? 66 74 79 70 68 65 69 63 (ftypheic…)
+Note: Variable length, usually starts with ftyp + brand
+
+SVG
+Text-based, usually starts with: 3C 73 76 67 (“<svg”)
+
+EPS (Encapsulated PostScript)
+Header: 25 21 50 53 ("%!PS")
+
+PDF (sometimes used for embedded images)
+Header: 25 50 44 46 ("%PDF")
+
+WEBP RIFF Chunk
+Header: 52 49 46 46 (“RIFF”) then 57 45 42 50 (“WEBP”)
+
+JPEG 2000 (.jp2)
+Header: 00 00 00 0C 6A 50 20 20 0D 0A 87 0A
+
+GIF + Extensions
+Animated GIFs follow same GIF headers, but may have additional logical screen descriptor
+
+PSD / PDD Variants
+Adobe Photoshop documents sometimes have 8BPS signature: 38 42 50 53
