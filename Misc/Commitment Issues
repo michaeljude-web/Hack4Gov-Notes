@@ -1,0 +1,23 @@
+┌──(kali㉿kali)-[~/Downloads/drop-in]
+└─$ git log --online
+fatal: unrecognized argument: --online
+                                                                                                                                                          
+┌──(kali㉿kali)-[~/Downloads/drop-in]
+└─$ ls
+message.txt
+                                                                                                                                                          
+┌──(kali㉿kali)-[~/Downloads/drop-in]
+└─$ git log --oneline
+a6dca68 (HEAD -> master) remove sensitive info
+e720dc2 create flag
+                                                                                                                                                          
+┌──(kali㉿kali)-[~/Downloads/drop-in]
+└─$ git show e720dc2:plag.txt
+fatal: path 'plag.txt' does not exist in 'e720dc2'
+                                                                                                                                                          
+┌──(kali㉿kali)-[~/Downloads/drop-in]
+└─$ git show e720dc2:message.txt
+picoCTF{s@n1t1z3_7246792d}
+                                                                                                                                                          
+┌──(kali㉿kali)-[~/Downloads/drop-in]
+└─$ 
