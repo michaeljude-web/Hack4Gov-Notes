@@ -1,0 +1,20 @@
+C:\home\kali\Downloads> binwalk --dd='.*' flag.png
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             PNG image, 512 x 504, 8-bit/color RGBA, non-interlaced
+41            0x29            Zlib compressed data, compressed
+39739         0x9B3B          Zip archive data, at least v1.0 to extract, name: secret/
+39804         0x9B7C          Zip archive data, at least v2.0 to extract, compressed size: 2997, uncompressed size: 3152, name: secret/flag.png
+43036         0xA81C          End of Zip archive, footer length: 22
+
+                                                                                                                                                                                                                                            
+C:\home\kali\Downloads> ls
+flag.png  _flag.png.extracted
+                                                                                                                                                                                                                                            
+C:\home\kali\Downloads> cd _flag.png.extracted
+                                                                                                                                                                                                                                            
+C:\home\kali\Downloads\_flag.png.extracted> ls
+0  29  29-0  9B3B  A81C
+                                                                                                                                                                                                                                            
+C:\home\kali\Downloads\_flag.png.extracted>  ----> Extract File
