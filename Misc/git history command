@@ -5,3 +5,7 @@
 >git reflog
 
 >git diff
+
+
+Run File:
+>git log index.py
