@@ -1,11 +1,9 @@
+// Command to Display Commit Logs
 >git log
-
 >git show
-
 >git reflog
-
 >git diff
 
 
-Run File:
+// Run File and Display Logs
 >git log index.py
