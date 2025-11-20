@@ -1,0 +1,11 @@
+>grep -R "picoCTF" file
+>grep "picoCTF" file
+
+//Kung hindi mo alam ang exact format ng flag
+>grep -Eo "picoCTF{.*}" file
+
+                                                                                                                                                                                                                                            
+//Most powerful command (guaranteed to work
+>strings file | grep -Eo "picoCTF{.*}"
+
+                                                                                                                                                                                                                                            
