@@ -1,0 +1,6 @@
+>strings static | grep -i pico
+                                                                                                                                  
+>strings static | grep -E "picoCTF"                                                                                                                                                                                                                                          
+
+⭐ Best one-line command (recommended):
+>strings static | grep -Eo "picoCTF{.*}"
