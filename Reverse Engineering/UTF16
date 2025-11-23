@@ -1,0 +1,14 @@
+┌──(kali㉿kali)-[~/Downloads]
+└─$ ls
+enc
+                                                                                                                                                                      
+┌──(kali㉿kali)-[~/Downloads]
+└─$ cat enc            
+灩捯䍔䙻ㄶ形楴獟楮獴㌴摟潦弸弰㑣〷㘰摽                                                                                                                                                                      
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python3 -c 'print("灩捯䍔䙻ㄶ形楴獟楮獴㌴摟潦弸弰㑣〷㘰摽".encode("utf-16-be").decode("latin1"))'
+
+picoCTF{16_bits_inst34d_of_8_04c0760d}
+                                                                                                                                                                      
+┌──(kali㉿kali)-[~/Downloads]
+└─$ 
